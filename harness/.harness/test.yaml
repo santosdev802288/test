@@ -1,0 +1,23 @@
+connector:
+  name: test
+  identifier: test
+  description: ""
+  orgIdentifier: default
+  projectIdentifier: PoCGithub
+  type: Github
+  spec:
+    url: https://github.com/santosdev802288
+    validationRepo: test
+    authentication:
+      type: Http
+      spec:
+        type: UsernameToken
+        spec:
+          username: santosdev802288
+          tokenRef: PoCGithubaccesstoken
+    apiAccess:
+      type: Token
+      spec:
+        tokenRef: PoCGithubaccesstoken
+    executeOnDelegate: true
+    type: Account
