@@ -1,0 +1,39 @@
+pipeline:
+    name: zxc
+    identifier: zxc
+    projectIdentifier: PoCGithub
+    orgIdentifier: default
+    tags: {}
+    properties:
+        ci:
+            codebase:
+                connectorRef: account.pocbitbucket
+                repoName: test
+                build: <+input>
+    stages:
+        - stage:
+              name: zczxc
+              identifier: zczxc
+              description: ""
+              type: CI
+              spec:
+                  cloneCodebase: true
+                  execution:
+                      steps:
+                          - step:
+                                type: Run
+                                name: asdasd
+                                identifier: asdasd
+                                spec:
+                                    connectorRef: account.SiigoQAACR
+                                    image: harness-tools:2.0.0
+                                    shell: Sh
+                                    command: echo "hola"
+                  infrastructure:
+                      type: KubernetesDirect
+                      spec:
+                          connectorRef: account.QAK8SHarnes
+                          namespace: harness-sa
+                          automountServiceAccountToken: true
+                          nodeSelector: {}
+                          os: Linux
