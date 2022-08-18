@@ -28,7 +28,9 @@ pipeline:
                                     connectorRef: account.SiigoQAACR
                                     image: harness-tools:2.0.0
                                     shell: Sh
-                                    command: echo "hola"
+                                    command: |-
+                                        echo "hola"
+                                        cat message.txt
                   infrastructure:
                       type: KubernetesDirect
                       spec:
