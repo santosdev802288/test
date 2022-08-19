@@ -1,0 +1,103 @@
+siigo-chart:
+  env: Development
+  envs:
+    GO_ENV: Development
+  istio:
+    enabled: true
+  apiGateway:
+    enabled: false
+    prefix: ''
+    host:
+      dns: '*'
+      port: 8081
+      protocol: HTTP
+  secrets: {}
+  replicaCount: 2
+  image:
+    repository: null
+    pullPolicy: IfNotPresent
+  ports:
+    - containerPort: 6000
+      name: grpc
+      protocol: TCP
+    - containerPort: 5000
+      name: http
+      protocol: TCP
+  service:
+    loadBalancerIP: ''
+    type: ClusterIP
+    ports:
+      - port: 5000
+        targetPort: 5000
+        protocol: TCP
+        name: http
+      - name: grpc
+        port: 6000
+        protocol: TCP
+        targetPort: 6000
+  keda: {}
+  livenessProbe:
+    failureThreshold: 6
+    httpGet:
+      path: /health
+      port: http
+      scheme: HTTP
+    periodSeconds: 10
+    successThreshold: 1
+    timeoutSeconds: 5
+    initialDelaySeconds: 5
+  readinessProbe:
+    failureThreshold: 6
+    httpGet:
+      path: /health
+      port: http
+      scheme: HTTP
+    periodSeconds: 10
+    successThreshold: 1
+    timeoutSeconds: 5
+    initialDelaySeconds: 5
+  hpa:
+    minReplicas: 1
+    maxReplicas: 10
+    metrics:
+      - type: Resource
+        resource:
+          name: cpu
+          target:
+            type: Utilization
+            averageUtilization: 50
+  resources:
+    limits:
+      cpu: 200m
+      memory: 256Mi
+    requests:
+      cpu: 100m
+      memory: 128Mi
+  podSecurityContext:
+    runAsUser: 1000
+    runAsGroup: 3000
+    fsGroup: 2000
+  securityContext:
+    allowPrivilegeEscalation: false
+    readOnlyRootFilesystem: false
+    runAsNonRoot: true
+    runAsUser: 1000
+  nodeSelector: {}
+  tolerations: []
+  affinity: {}
+  podDisruptionBugets:
+    minAvailable: 20%
+  strategy: {}
+  outlierDetection: {}
+  podAnnotations: {}
+  serviceAnnotations: {}
+  labels:
+    tags:
+      datadoghq:
+        com:
+          tribu: ARQUITECTURA
+          owner: carr802565
+          group: CLOUD_NATIVE
+  appsettings: {}
+  volumeMounts: []
+  volumes: []

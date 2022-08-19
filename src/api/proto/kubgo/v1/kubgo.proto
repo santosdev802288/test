@@ -1,0 +1,141 @@
+// Copyright 2020 Siigo. All rights reserved.
+//
+// Use of this source code is governed by an MIT-style
+// license that can be found in the LICENSE file.
+
+syntax = "proto3";
+
+package kubgo.v1;
+
+import "google/api/annotations.proto";
+import "google/api/field_behavior.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+import "validate/validate.proto";
+
+option go_package = "siigo.com/kubgo/src/api/proto/kubgo/v1;kubgov1";
+
+message HealthResponse {
+  string status = 1;
+}
+
+service HealthService {
+  rpc Health(google.protobuf.Empty) returns (HealthResponse) {
+    option (google.api.http) = {
+      get: "/api/health"
+    };
+  }
+}
+
+message FindKubgosResponse {
+  repeated Kubgo kubgos = 1;
+}
+// kubgo services
+message GetKubgoRequest {
+  // @inject_tag: validate:"email"
+  string id = 1;
+}
+
+message DeleteKubgoRequest {
+  string id = 1;
+}
+
+message UpdateKubgoRequest {
+  Kubgo kubgo = 1 [(validate.rules).message.required = true];
+}
+
+message GetKubgoResponse {
+  Kubgo kubgo = 1 [(validate.rules).message.required = true];
+}
+
+message DeleteKubgoResponse {
+  Kubgo kubgo = 1 [(validate.rules).message.required = true];
+}
+
+message KubgoResponse {
+  Kubgo kubgo = 1 [(validate.rules).message.required = true];
+}
+
+message AddKubgoRequest {
+  Kubgo kubgo = 1 [(validate.rules).message.required = true];
+}
+
+message AddKubgoResponse {
+  Kubgo kubgo = 1;
+}
+message UpdateKubgoResponse {
+  Kubgo kubgo = 1;
+}
+
+message Kubgo {
+  string id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "The UUID field."
+  }];
+  int32 cost = 2;
+  bool activated = 3;
+  string address = 4;
+  string email = 5 [
+    (validate.rules).string.email = true,
+    (google.api.field_behavior) = REQUIRED
+  ];
+  google.protobuf.Timestamp occurred_at = 6 [(google.api.field_behavior) = OUTPUT_ONLY];
+}
+
+message Kubgos {
+  repeated Kubgo kubgo = 1;
+}
+
+service KubgoService {
+  rpc FindKubgos(google.protobuf.Empty) returns (FindKubgosResponse) {
+    option (google.api.http) = {
+      get: "/api/v1/kubgos"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "List All kubgos"
+      description: "Find All Process."
+    };
+  }
+
+  rpc AddKubgo(AddKubgoRequest) returns (AddKubgoResponse) {
+    option (google.api.http) = {
+      post: "/api/v1/kubgo"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "Add a kubgo"
+      description: "Add a kubgo to the server."
+    };
+  }
+
+  rpc GetKubgo(GetKubgoRequest) returns (GetKubgoResponse) {
+    option (google.api.http) = {
+      get: "/api/v1/kubgo/{id}"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "Find a kubgo"
+      description: "Find a kubgo by uuid."
+    };
+  }
+
+  rpc DeleteKubgo(DeleteKubgoRequest) returns (DeleteKubgoResponse) {
+    option (google.api.http) = {
+      delete: "/api/v1/kubgo/{id}"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "Delete a kubgo"
+      description: "Delete a kubgo by uuid."
+    };
+  }
+
+  rpc UpdateKubgo(UpdateKubgoRequest) returns (UpdateKubgoResponse) {
+    option (google.api.http) = {
+      put: "/api/v1/kubgo/{kubgo.id}"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "Update a kubgo"
+      description: "Update a kubgo body."
+    };
+  }
+}

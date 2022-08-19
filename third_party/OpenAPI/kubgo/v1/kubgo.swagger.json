@@ -1,0 +1,336 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "kubgo/v1/kubgo.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "HealthService"
+    },
+    {
+      "name": "KubgoService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/health": {
+      "get": {
+        "operationId": "HealthService_Health",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1HealthResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "HealthService"
+        ]
+      }
+    },
+    "/api/v1/kubgo": {
+      "post": {
+        "summary": "Add a kubgo",
+        "description": "Add a kubgo to the server.",
+        "operationId": "KubgoService_AddKubgo",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1AddKubgoResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1AddKubgoRequest"
+            }
+          }
+        ],
+        "tags": [
+          "KubgoService"
+        ]
+      }
+    },
+    "/api/v1/kubgo/{id}": {
+      "get": {
+        "summary": "Find a kubgo",
+        "description": "Find a kubgo by uuid.",
+        "operationId": "KubgoService_GetKubgo",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetKubgoResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "description": "@inject_tag: validate:\"email\"",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "KubgoService"
+        ]
+      },
+      "delete": {
+        "summary": "Delete a kubgo",
+        "description": "Delete a kubgo by uuid.",
+        "operationId": "KubgoService_DeleteKubgo",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1DeleteKubgoResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "KubgoService"
+        ]
+      }
+    },
+    "/api/v1/kubgo/{kubgo.id}": {
+      "put": {
+        "summary": "Update a kubgo",
+        "description": "Update a kubgo body.",
+        "operationId": "KubgoService_UpdateKubgo",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1UpdateKubgoResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "kubgo.id",
+            "description": "The UUID field.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1UpdateKubgoRequest"
+            }
+          }
+        ],
+        "tags": [
+          "KubgoService"
+        ]
+      }
+    },
+    "/api/v1/kubgos": {
+      "get": {
+        "summary": "List All kubgos",
+        "description": "Find All Process.",
+        "operationId": "KubgoService_FindKubgos",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1FindKubgosResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "KubgoService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "v1AddKubgoRequest": {
+      "type": "object",
+      "properties": {
+        "kubgo": {
+          "$ref": "#/definitions/v1Kubgo"
+        }
+      }
+    },
+    "v1AddKubgoResponse": {
+      "type": "object",
+      "properties": {
+        "kubgo": {
+          "$ref": "#/definitions/v1Kubgo"
+        }
+      }
+    },
+    "v1DeleteKubgoResponse": {
+      "type": "object",
+      "properties": {
+        "kubgo": {
+          "$ref": "#/definitions/v1Kubgo"
+        }
+      }
+    },
+    "v1FindKubgosResponse": {
+      "type": "object",
+      "properties": {
+        "kubgos": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1Kubgo"
+          }
+        }
+      }
+    },
+    "v1GetKubgoResponse": {
+      "type": "object",
+      "properties": {
+        "kubgo": {
+          "$ref": "#/definitions/v1Kubgo"
+        }
+      }
+    },
+    "v1HealthResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string"
+        }
+      }
+    },
+    "v1Kubgo": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The UUID field."
+        },
+        "cost": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "activated": {
+          "type": "boolean"
+        },
+        "address": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string",
+          "required": [
+            "email"
+          ]
+        },
+        "occurredAt": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "email"
+      ]
+    },
+    "v1UpdateKubgoRequest": {
+      "type": "object",
+      "properties": {
+        "kubgo": {
+          "$ref": "#/definitions/v1Kubgo"
+        }
+      }
+    },
+    "v1UpdateKubgoResponse": {
+      "type": "object",
+      "properties": {
+        "kubgo": {
+          "$ref": "#/definitions/v1Kubgo"
+        }
+      }
+    }
+  }
+}
