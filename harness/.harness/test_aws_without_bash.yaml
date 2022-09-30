@@ -34,7 +34,7 @@ pipeline:
           infrastructure:
             type: KubernetesDirect
             spec:
-              connectorRef: account.QACOLClusterProvider
+              connectorRef: account.QAK8SHarnes
               namespace: harness-sa
               automountServiceAccountToken: true
               nodeSelector: {}
