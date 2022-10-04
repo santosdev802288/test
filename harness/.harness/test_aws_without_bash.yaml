@@ -32,7 +32,7 @@ pipeline:
                       ls
                       aws --version
                       echo <+pipeline.variables.var1>
-                      echo ${pipeline.variables.var1}
+                      # echo ${pipeline.variables.var1}
                       cat test.yaml
           infrastructure:
             type: KubernetesDirect
