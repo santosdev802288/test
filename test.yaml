@@ -1,4 +1,4 @@
-<+execution.steps.asdasd.identifier>
+<+pipeline.variables.var1>
 
-${execution.steps.asdasd.identifier}
+${pipeline.variables.var1}
 
