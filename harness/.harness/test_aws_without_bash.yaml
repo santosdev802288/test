@@ -31,7 +31,8 @@ pipeline:
                     command: |-
                       ls
                       aws --version
-                      echo <+execution.steps.asdasd.identifier>
+                      echo <+pipeline.variables.var1>
+                      echo ${pipeline.variables.var1}
                       cat test.yaml
           infrastructure:
             type: KubernetesDirect
@@ -41,3 +42,8 @@ pipeline:
               automountServiceAccountToken: true
               nodeSelector: {}
               os: Linux
+  variables:
+    - name: var1
+      type: String
+      description: ""
+      value: hola
