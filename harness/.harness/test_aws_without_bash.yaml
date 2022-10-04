@@ -31,7 +31,7 @@ pipeline:
                     command: |-
                       ls
                       aws --version
-
+                      echo <+execution.steps.asdasd.identifier>
                       cat test.yaml
           infrastructure:
             type: KubernetesDirect
