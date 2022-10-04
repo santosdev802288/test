@@ -31,6 +31,8 @@ pipeline:
                     command: |-
                       ls
                       aws --version
+
+                      cat test.yaml
           infrastructure:
             type: KubernetesDirect
             spec:
