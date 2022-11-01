@@ -1,4 +1,2 @@
-<+pipeline.variables.var1>
-
-${pipeline.variables.var1}
-
+#{var3}#
+#{var4}#
