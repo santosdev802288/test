@@ -1,0 +1,9 @@
+{
+    "env1":"/var replaced/",
+
+"var1":"/var1 replaced!!/",
+
+"CDN":"this is the cdn url",
+
+"var4":"..... var 4 value .... "
+}
