@@ -1,0 +1,5 @@
+{
+    "tokenPrefix": "#{",
+    "tokenSuffix": "}#",
+    "files":"[\"*.js\"]"
+}
