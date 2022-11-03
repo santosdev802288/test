@@ -1,5 +1,5 @@
 {
     "tokenPrefix": "#{",
     "tokenSuffix": "}#",
-    "files":"[\"*.js\"]"
+    "files":"[\"*.yaml\",\"*.txt\"]"
 }
