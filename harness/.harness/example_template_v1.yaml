@@ -1,0 +1,32 @@
+template:
+  name: example template
+  type: Stage
+  projectIdentifier: PoCGithub
+  orgIdentifier: default
+  spec:
+    type: CI
+    spec:
+      cloneCodebase: true
+      execution:
+        steps:
+          - step:
+              type: Run
+              name: asdasd
+              identifier: asdasd
+              spec:
+                connectorRef: account.SiigoQAACR
+                image: harness-tools:2.0.0
+                shell: Sh
+                command: |-
+                  echo "hola"
+                  cat message.txt
+      infrastructure:
+        type: KubernetesDirect
+        spec:
+          connectorRef: account.QAK8SHarnes
+          namespace: harness-sa
+          automountServiceAccountToken: true
+          nodeSelector: {}
+          os: Linux
+  identifier: example_template
+  versionLabel: v1
