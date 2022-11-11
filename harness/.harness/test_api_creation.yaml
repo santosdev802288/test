@@ -1,0 +1,38 @@
+pipeline:
+  name: test api creation
+  identifier: test_api_creation
+  projectIdentifier: PoCGithub
+  orgIdentifier: default
+  tags: {}
+  properties:
+    ci:
+      codebase:
+        connectorRef: account.pocbitbucket
+        repoName: test
+        build: <+input>
+  stages:
+    - stage:
+        name: asd
+        identifier: asd
+        description: ""
+        type: CI
+        spec:
+          cloneCodebase: true
+          execution:
+            steps:
+              - step:
+                  type: Run
+                  name: asda
+                  identifier: asda
+                  spec:
+                    connectorRef: account.SiigoQAACR
+                    image: harness-tools:2.0.1
+                    shell: Sh
+                    command: ls
+          infrastructure:
+            type: KubernetesDirect
+            spec:
+              connectorRef: account.PDCOLCluster
+              namespace: harness-sa
+              nodeSelector: {}
+              os: Linux
