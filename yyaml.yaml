@@ -1,0 +1,42 @@
+pipeline:
+  name: with pull requests
+  identifier: with_pull_requests
+  template:
+    templateRef: MSGateway
+    versionLabel: v0.6
+    templateInputs:
+      stages:
+        - stage:
+            identifier: gateway_deploy
+            template:
+              templateInputs:
+                type: Deployment
+                spec:
+                  serviceConfig:
+                    serviceRef: <+input>
+      variables:
+        - name: microserviceName
+          type: String
+          value: <+input>
+        - name: sonarVersion
+          type: String
+          value: <+input>
+        - name: namespace
+          type: String
+          value: <+input>
+        - name: repositoryName
+          type: String
+          value: <+input>
+        - name: sourceBranch
+          type: String
+          value: <+input>
+        - name: serviceType
+          type: String
+          value: <+input>.allowedValues(gateway,.net,go)
+      properties:
+        ci:
+          codebase:
+            build: <+input>
+  tags: {}
+  projectIdentifier: Siigo_SAS
+  orgIdentifier: default
