@@ -1,0 +1,37 @@
+pipeline:
+  name: test githubactions
+  identifier: test_githubactions
+  projectIdentifier: Siigo_SAS
+  orgIdentifier: default
+  tags: {}
+  properties:
+    ci:
+      codebase:
+        connectorRef: account.PoCEntireAccountGtihubConnector
+        repoName: test
+        build: <+input>
+  stages:
+    - stage:
+        name: test
+        identifier: test
+        template:
+          templateRef: STAGEGithubActions
+          versionLabel: V1
+          templateInputs:
+            type: CI
+            variables:
+              - name: pluginName
+                type: String
+                value: cschleiden/replace-tokens@v1
+              - name: pluginWith
+                type: String
+                value: "{\"tokenPrefix\":\"#{\",\"tokenSuffix\":\"}#\",\"files\":\"[\\\"*.yaml\\\",\\\"*.txt\\\"]\"}"
+              - name: pluginEnv
+                type: String
+                value: "{\"env1\":\"/var replaced/\",\"var1\":\"/var1 replaced!!/\",\"CDN\":\"this is the cdn url\",\"var4\":\"..... var 4 value .... \"}"
+              - name: pluginEnvFilename
+                type: String
+                value: <+input>
+              - name: pluginWithFilename
+                type: String
+                value: <+input>
