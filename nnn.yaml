@@ -28,7 +28,7 @@ pipeline:
                 value: "{\\\"tokenPrefix\\\":\\\"#{\\\",\\\"tokenSuffix\\\":\\\"}#\\\",\\\"files\\\":\\\"[\\\\\\\"*.yaml\\\\\\\",\\\\\\\"*.txt\\\\\\\"]\\\"}"
               - name: pluginEnv
                 type: String
-                value: "{\"env1\":\"/var replaced/\",\"var1\":\"/var1 replaced!!/\",\"CDN\":\"this is the cdn url\",\"var4\":\"..... var 4 value .... \"}"
+                value: "{\\\"env1\\\":\\\"/var replaced/\\\",\\\"var1\\\":\\\"/var1 replaced!!/\\\",\\\"CDN\\\":\\\"this is the cdn url\\\",\\\"var4\\\":\\\"..... var 4 value .... \\\"}"
               - name: pluginEnvFilename
                 type: String
                 value: <+input>
