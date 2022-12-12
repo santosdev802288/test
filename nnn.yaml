@@ -22,7 +22,7 @@ pipeline:
             variables:
               - name: pluginName
                 type: String
-                value: cschleiden/replace-tokens@v1
+                value: cschleiden/replace-tokens@v1.1
               - name: pluginWith
                 type: String
                 value: "{\\\"tokenPrefix\\\":\\\"#{\\\",\\\"tokenSuffix\\\":\\\"}#\\\",\\\"files\\\":\\\"[\\\\\\\"*.yaml\\\\\\\",\\\\\\\"*.txt\\\\\\\"]\\\"}"
